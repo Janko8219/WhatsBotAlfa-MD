@@ -1229,7 +1229,7 @@ if (THEME === "normal") {
     ]
             let contextInfo = {
                 externalAdReply: {
-                    title: "AMAROK-MD"
+                    title: "𝐽𝑂-𝑗𝑜-𝑩𝒐𝑻"
                     , body: "TREME-TITANS"
                     , mediaType: 2
                     , thumbnail: 'https://github.com/Alien-Alfa/Alien-alfa/blob/beta/MD-Images/done.jpg?raw=true'
