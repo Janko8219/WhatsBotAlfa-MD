@@ -81,27 +81,24 @@ if (THEME === "alfa") {
 
             }
             , async (message, match, m) => {
-                let {
-                    prefix
-                } = message;
+  
                 if (HANDLERS === "^")
                     var presix = ''
                 else
                     var presix = prefix
-                if (match) {
-
-                    for (let i of events.commands) {
-                        if (i.pattern.test(message.prefix + match))
-                            message.treply(`
-  ╭════〘 *Command Info* 〙════⊷❍
-  ┃✧╭─────────────────
-  ┃ \`\`\`Command : ${message.prefix}${match.trim()}\`\`\`
-  ┃ \`\`\`Description : ${i.desc}\`\`\`
-  ┃✧╰─────────────────
-  ╰══════════════════⊷❍`);
-                    }
-                }
-                if (!match) {
+                    if (match) {
+                        for (let i of events.commands) {
+                          if (i.pattern.test(presix + match))
+                          message.treply(`
+                          ╭════〘 *Command Info* 〙════⊷❍
+                          ┃✧╭─────────────────
+                          ┃ \`\`\`Command : ${presix}${match.trim()}\`\`\`
+                          ┃ \`\`\`Description : ${i.desc}\`\`\`
+                          ┃✧╰─────────────────
+                          ╰══════════════════⊷❍`);
+                        }
+                      } else {
+                    
 
                     let [date, time] = new Date()
                         .toLocaleString("en-IN", {
@@ -112,35 +109,35 @@ if (THEME === "alfa") {
                     for (let i of events.commands) {
                         if (i.type === 'group') {
                             gmsg +=
-                                `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                                `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                         };
                         if (i.type === 'downloader') {
                             dlmsg +=
-                                `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                                `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                         };
                         if (i.type === 'textmaker') {
                             tms +=
-                                `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                                `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                         };
                         if (i.type === 'user') {
                             ownmsg +=
-                                `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                                `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                         };
                         if (i.type === 'edit') {
                             edmsg +=
-                                `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                                `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                         };
                         if (i.type === 'xediazi') {
                             xmediazi +=
-                                `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                                `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                         };
                         if (i.type === 'search') {
                             srmsg +=
-                                `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                                `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                         };
                         if (i.type === 'tool') {
                             utilmsg +=
-                                `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                                `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                         };
                     }
 
@@ -245,9 +242,10 @@ if (THEME === "alfa") {
 ╭────────────────
 `
 
-            let {
-                prefix
-            } = message;
+                if (HANDLERS === "^")
+                    var presix = ''
+                else
+                    var presix = prefix
             let [date, time] = new Date()
                 .toLocaleString("en-IN", {
                     timeZone: "Asia/Kolkata"
@@ -258,7 +256,7 @@ if (THEME === "alfa") {
             for (let i of events.commands) {
                 if (i.type === 'search') {
                     srmsg +=
-                        `│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                        `│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                 };
             }
 
@@ -287,9 +285,10 @@ if (THEME === "alfa") {
 ╭────────────────
 `
 
-            let {
-                prefix
-            } = message;
+                if (HANDLERS === "^")
+                    var presix = ''
+                else
+                    var presix = prefix
             let [date, time] = new Date()
                 .toLocaleString("en-IN", {
                     timeZone: "Asia/Kolkata"
@@ -300,7 +299,7 @@ if (THEME === "alfa") {
             for (let i of events.commands) {
                 if (i.type === 'group') {
                     gmsg +=
-                        `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                 };
             }
 
@@ -329,9 +328,10 @@ if (THEME === "alfa") {
 ╭────────────────
 `
 
-            let {
-                prefix
-            } = message;
+                if (HANDLERS === "^")
+                    var presix = ''
+                else
+                    var presix = prefix
             let [date, time] = new Date()
                 .toLocaleString("en-IN", {
                     timeZone: "Asia/Kolkata"
@@ -342,7 +342,7 @@ if (THEME === "alfa") {
             for (let i of events.commands) {
                 if (i.type === 'downloader') {
                     dlmsg +=
-                        `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                 };
             }
 
@@ -371,9 +371,10 @@ if (THEME === "alfa") {
 ╭────────────────
 `
 
-            let {
-                prefix
-            } = message;
+                if (HANDLERS === "^")
+                    var presix = ''
+                else
+                    var presix = prefix
             let [date, time] = new Date()
                 .toLocaleString("en-IN", {
                     timeZone: "Asia/Kolkata"
@@ -384,7 +385,7 @@ if (THEME === "alfa") {
             for (let i of events.commands) {
                 if (i.type === 'textmaker') {
                     tms +=
-                        `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                 };
             }
 
@@ -413,9 +414,10 @@ if (THEME === "alfa") {
 ╭────────────────
 `
 
-            let {
-                prefix
-            } = message;
+                if (HANDLERS === "^")
+                    var presix = ''
+                else
+                    var presix = prefix
             let [date, time] = new Date()
                 .toLocaleString("en-IN", {
                     timeZone: "Asia/Kolkata"
@@ -426,7 +428,7 @@ if (THEME === "alfa") {
             for (let i of events.commands) {
                 if (i.type === 'user') {
                     ownmsg +=
-                        `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                 };
             }
 
@@ -455,9 +457,10 @@ if (THEME === "alfa") {
 ╭────────────────
 `
 
-            let {
-                prefix
-            } = message;
+                if (HANDLERS === "^")
+                    var presix = ''
+                else
+                    var presix = prefix
             let [date, time] = new Date()
                 .toLocaleString("en-IN", {
                     timeZone: "Asia/Kolkata"
@@ -468,7 +471,7 @@ if (THEME === "alfa") {
             for (let i of events.commands) {
                 if (i.type === 'edit') {
                     edmsg +=
-                        `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                 };
             }
 
@@ -497,9 +500,10 @@ if (THEME === "alfa") {
 ╭────────────────
 `
 
-            let {
-                prefix
-            } = message;
+                if (HANDLERS === "^")
+                    var presix = ''
+                else
+                    var presix = prefix
             let [date, time] = new Date()
                 .toLocaleString("en-IN", {
                     timeZone: "Asia/Kolkata"
@@ -510,7 +514,7 @@ if (THEME === "alfa") {
             for (let i of events.commands) {
                 if (i.type === 'tool') {
                     utilmsg +=
-                        `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                 };
             }
 
@@ -539,9 +543,10 @@ if (THEME === "alfa") {
 ╭────────────────
 `
 
-            let {
-                prefix
-            } = message;
+                if (HANDLERS === "^")
+                    var presix = ''
+                else
+                    var presix = prefix
             let [date, time] = new Date()
                 .toLocaleString("en-IN", {
                     timeZone: "Asia/Kolkata"
@@ -552,7 +557,7 @@ if (THEME === "alfa") {
             for (let i of events.commands) {
                 if (i.type === 'xediazi') {
                     xmediazi +=
-                        `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                 };
             }
 
@@ -572,26 +577,23 @@ if (THEME === "alfa") {
             , type: "theme",
 
         }, async (message, match, m) => {
+            if (HANDLERS === "^")
+            var presix = ''
+        else
+            var presix = prefix
             if (match) {
                 for (let i of events.commands) {
-                    if (i.pattern.test(message.prefix + match))
+                    if (i.pattern.test(presix + match))
                         message.treply(`
 ╭════〘 *Command Info* 〙════⊷❍
 ┃✧╭─────────────────
-┃ \`\`\`Command : ${message.prefix}${match.trim()}\`\`\`
+┃ \`\`\`Command : ${presix}${match.trim()}\`\`\`
 ┃ \`\`\`Description : ${i.desc}\`\`\`
 ┃✧╰─────────────────
 ╰══════════════════⊷❍`);
                 }
             }
             if (!match) {
-                let {
-                    prefix
-                } = message;
-                if (HANDLERS === "^")
-                    var presix = ''
-                else
-                    var presix = prefix
 
                 let [date, time] = new Date()
                     .toLocaleString("en-IN", {
@@ -611,58 +613,51 @@ if (THEME === "alfa") {
                 for (let i of events.commands) {
                     if (i.type === 'group') {
                         gmsg +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                            `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                     };
                     if (i.type === 'downloader') {
                         dlmsg +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                            `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                     };
                     if (i.type === 'textmaker') {
                         tms +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                            `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                     };
                     if (i.type === 'user') {
                         ownmsg +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                            `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                     };
                     if (i.type === 'edit') {
                         edmsg +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                            `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                     };
                     if (i.type === 'xediazi') {
                         xmediazi +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                            `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                     };
                     if (i.type === 'search') {
                         srmsg +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                            `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                     };
                     if (i.type === 'tool') {
                         utilmsg +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                            `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
                     };
                 }
                 var menu = `
-╭═══〘 ${BOT_NAME} 〙═══⊷❍
+╭═══ ${BOT_NAME} ═══⊷❍
 ┃✧╭──────────────
-┃✧│
+┃✧│ prefix :
 ┃✧│ Owner : ${OWNER_NAME}
-┃✧│ User : ${ await message.senderName}
+┃✧│ User : ${message.pushName}
 ┃✧│ Mode : ${WORK_TYPE}
 ┃✧│ Server : ${HEROKU_APP_NAME}
-┃✧│ Total RAM: 16GB
-┃✧│ Available RAM: Nill
-┃✧│ Disk Space: 620 GB
+┃✧│ Total RAM: ${avbMem.toFixed(2)} GB
+┃✧│ Commands: ${events.commands.length}
 ┃✧│ Version: ${require("../package.json").version}
-┃✧│
-┃✧│
-┃✧│  ▎▍▌▌▉▏▎▌▉▐▏▌▎
-┃✧│  ▎▍▌▌▉▏▎▌▉▐▏▌▎
-┃✧│   ${SUDO.split(",")[0]}
-┃✧│ 
 ┃✧╰───────────────
 ╰═════════════════⊷
-╭════〘 Group 〙════⊷❍
+╭════ Group ════⊷❍
 ┃✧╭─────────────────
 ┃✧│ 
 ${gmsg}
@@ -714,34 +709,28 @@ ${srmsg}
 
 `
                 // return await message.sendImageTemplate(await skbuffer(SUDO.split(";")[3]),FancyRandom(menu),"All rights reserved "+SUDO.split(";")[0],buttons);
+             let buttons= [
+                       {
+                           buttonId: `${presix}ping`
+                           , buttonText: {
+                               displayText: serif_B(
+                                   "PING")
+                           }
+     , }
+                       , {
+                           buttonId: `${presix}list`
+                           , buttonText: {
+                               displayText: serif_B(
+                                   "LIST")
+                           }
+     , }
+   , ]
+               
 
                 return await message.client.sendMessage(message.jid,
-                {
-                    image: {
-                        url: `https://github.com/Alien-Alfa/Alien-alfa/blob/beta/img/Alien-Alfa.png?raw=true`
-                    }
-                    , caption: styletext(menu, parseInt(
-                        `${FONT_STYLE}`))
-                    , footer: tiny(
-                        `Alfa-Alien-Alfa ${WORK_TYPE} Bot\nVersion : ${require("../package.json").version}`
-                    )
-                    , buttons: [
-                        {
-                            buttonId: `${presix}ping`
-                            , buttonText: {
-                                displayText: serif_B(
-                                    "PING")
-                            }
-      , }
-                        , {
-                            buttonId: `${presix}list`
-                            , buttonText: {
-                                displayText: serif_B(
-                                    "LIST")
-                            }
-      , }
-    , ]
-                , });
+                     {text: styletext(menu,
+                         parseInt(`${FONT_STYLE}`)),
+                          footer: tiny(`Alfa-Alien-Alfa ${WORK_TYPE} Bot\nVersion : ${require("../package.json").version}`)});
 
             }
 
@@ -819,9 +808,9 @@ if (THEME === "xasena") {
 
                 if (match) {
                     for (let i of events.commands) {
-                        if (i.pattern.test(message.prefix + match))
+                        if (i.pattern.test(presix + match))
                             message.treply(
-                                `\`\`\`Command : ${message.prefix}${match.trim()}
+                                `\`\`\`Command : ${presix}${match.trim()}
   Description : ${i.desc}\`\`\``
                             );
                     }
@@ -1001,187 +990,175 @@ if (THEME === "xasena") {
 
 if (THEME === "normal") {
 
-    var gmsg = ""
-        , ownmsg = ""
-        , dlmsg = ""
-        , utilmsg = ""
-        , srmsg = ""
-        , tms = ""
-        , lms = ""
-        , edmsg = ""
-        , xmediazi = "";
-
     command({
-            pattern: "list"
-            , fromMe: isPrivate
-            , desc: "Show All commands"
-            , dontAddCommandList: true
-            , type: "theme",
+        pattern: "menu"
+        , fromMe: isPrivate
+        , desc: "Show All commands"
+        , dontAddCommandList: true
+        , type: "theme",
 
+    }, async (message, match, m) => {
+        if (match) {
+            for (let i of events.commands) {
+                if (i.pattern.test(presix + match))
+                    message.treply(`
+╭════〘 *Command Info* 〙════⊷❍
+┃✧╭─────────────────
+┃ \`\`\`Command : ${presix}${match.trim()}\`\`\`
+┃ \`\`\`Description : ${i.desc}\`\`\`
+┃✧╰─────────────────
+╰══════════════════⊷❍`);
+            }
         }
-        , async (message, match, m) => {
+        if (!match) {
             let {
-                preefix
+                prefix
             } = message;
-
             if (HANDLERS === "^")
                 var presix = ''
             else
                 var presix = prefix
-            if (match) {
 
-                for (let i of events.commands) {
-                    if (i.pattern.test(message.preefix + match))
-                        message.treply(`
-  ╭════〘 *Command Info* 〙════⊷❍
-  ┃✧╭─────────────────
-  ┃ \`\`\`Command : ${message.prefix}${match.trim()}\`\`\`
-  ┃ \`\`\`Description : ${i.desc}\`\`\`
-  ┃✧╰─────────────────
-  ╰══════════════════⊷❍`);
-                }
+            let [date, time] = new Date()
+                .toLocaleString("en-IN", {
+                    timeZone: "Asia/Kolkata"
+                })
+                .split(",");
+
+            var gmsg = ""
+                , ownmsg = ""
+                , dlmsg = ""
+                , utilmsg = ""
+                , srmsg = ""
+                , tms = ""
+                , lms = ""
+                , edmsg = ""
+                , xmediazi = "";
+            for (let i of events.commands) {
+                if (i.type === 'group') {
+                    gmsg +=
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                };
+                if (i.type === 'downloader') {
+                    dlmsg +=
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                };
+                if (i.type === 'textmaker') {
+                    tms +=
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                };
+                if (i.type === 'user') {
+                    ownmsg +=
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                };
+                if (i.type === 'edit') {
+                    edmsg +=
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                };
+                if (i.type === 'xediazi') {
+                    xmediazi +=
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                };
+                if (i.type === 'search') {
+                    srmsg +=
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                };
+                if (i.type === 'tool') {
+                    utilmsg +=
+                        `┃✧│ ${presix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
+                };
             }
-            if (!match) {
+            var menu = `
+╭═══ ${BOT_NAME} ═══⊷❍
+┃╭──────────────
+┃│ prefix :
+┃│ Owner : ${OWNER_NAME}
+┃│ User : ${message.pushName}
+┃│ Mode : ${WORK_TYPE}
+┃│ Server : ${HEROKU_APP_NAME}
+┃│ Total RAM: ${avbMem.toFixed(2)} GB
+┃│ Commands: ${events.commands.length}
+┃│ Version: ${require("../package.json").version}
+┃╰───────────────
+╰═════════════════⊷
+╭════ Group ════⊷❍
+┃╭─────────────────
+┃│ 
+${gmsg}
+┃╰─────────────────
+╰══════════════════⊷❍
+╭════〘 Download 〙════⊷❍
+┃╭─────────────────
+┃│ 
+${dlmsg}
+┃╰─────────────────
+╰══════════════════⊷❍
+╭════〘 Tools 〙════⊷❍
+┃╭─────────────────
+┃│ 
+${utilmsg}
+┃╰─────────────────
+╰══════════════════⊷❍
+╭════〘 Logo Maker 〙════⊷❍
+┃╭─────────────────
+┃│ 
+┃│ logo
+${tms}
+┃╰─────────────────
+╰══════════════════⊷❍
+╭════〘 Owner 〙════⊷❍
+┃╭─────────────────
+┃│ 
+${ownmsg}
+┃╰─────────────────
+╰══════════════════⊷❍
+╭════〘 Edit 〙════⊷❍
+┃╭─────────────────
+┃│ 
+${edmsg}
+┃╰─────────────────
+╰══════════════════⊷❍
+╭════〘 X-Media 〙════⊷❍
+┃╭─────────────────
+┃│ 
+${xmediazi}
+┃╰─────────────────
+╰══════════════════⊷❍
+╭════〘 Search 〙════⊷❍
+┃╭─────────────────
+┃│ 
+${srmsg}
+┃╰─────────────────
+╰══════════════════⊷❍
 
-                let [date, time] = new Date()
-                    .toLocaleString("en-IN", {
-                        timeZone: "Asia/Kolkata"
-                    })
-                    .split(",");
+`
+            // return await message.sendImageTemplate(await skbuffer(SUDO.split(";")[3]),FancyRandom(menu),"All rights reserved "+SUDO.split(";")[0],buttons);
+         let buttons= [
+                   {
+                       buttonId: `${presix}ping`
+                       , buttonText: {
+                           displayText: serif_B(
+                               "PING")
+                       }
+ , }
+                   , {
+                       buttonId: `${presix}list`
+                       , buttonText: {
+                           displayText: serif_B(
+                               "LIST")
+                       }
+ , }
+, ]
+           
 
-                for (let i of events.commands) {
-                    if (i.type === 'group') {
-                        gmsg +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
-                    };
-                    if (i.type === 'downloader') {
-                        dlmsg +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
-                    };
-                    if (i.type === 'textmaker') {
-                        tms +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
-                    };
-                    if (i.type === 'user') {
-                        ownmsg +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
-                    };
-                    if (i.type === 'edit') {
-                        edmsg +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
-                    };
-                    if (i.type === 'xediazi') {
-                        xmediazi +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
-                    };
-                    if (i.type === 'search') {
-                        srmsg +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
-                    };
-                    if (i.type === 'tool') {
-                        utilmsg +=
-                            `┃✧│ ${message.prefix}${i.pattern.toString().match(/(\W*)([A-Za-zğüşıiöç1234567890 ]*)/)[2]} \n`
-                    };
-                }
+            return await message.client.sendMessage(message.jid,
+                 {text: styletext(menu,
+                     parseInt(`${FONT_STYLE}`)),
+                      footer: tiny(`Alfa-Alien-Alfa ${WORK_TYPE} Bot\nVersion : ${require("../package.json").version}`)});
 
-                let men = `╭═══〘 ${BOT_NAME} 〙═══⊷❍
-┃✧╭──────────────
-┃✧│
-┃✧│ Owner : ${OWNER_NAME}
-┃✧│ User : ${message.pushName}
-┃✧│ Mode : ${WORK_TYPE}
-┃✧│ Total RAM: ${avbMem.toFixed(2)} GB
-┃✧│ Available RAM: ${allFreeMem.toFixed(0)}GB / ${avbMem.toFixed(2)}GB
-┃✧│ Commands: ${events.commands.length}
-┃✧│ Uptime: ${clockString(uptime())}
-┃✧│ Version: ${require("../package.json").version}
-┃✧│
-┃✧│
-┃✧│  ▎▍▌▌▉▏▎▌▉▐▏▌▎
-┃✧│  ▎▍▌▌▉▏▎▌▉▐▏▌▎
-┃✧│   ${ await message.pushName}
-┃✧│ 
-┃✧╰───────────────
-╰═════════════════⊷`
+        }
 
-                const sections = [
-                    {
-                        title: styletext("These Are The list",
-                            parseInt(`${FONT_STYLE}`))
-                        , rows: [
-                            {
-                                title: styletext(`All Menu`,
-                                    parseInt(
-                                        `${FONT_STYLE}`))
-                                , rowId: `${presix}allmenu`
-                            }
-                            , {
-                                title: styletext(`Edit List`,
-                                    parseInt(
-                                        `${FONT_STYLE}`))
-                                , rowId: `${presix}msearch`
-                            }
-                            , {
-                                title: styletext(`Search List`,
-                                    parseInt(
-                                        `${FONT_STYLE}`))
-                                , rowId: `${presix}allmenu`
-                            }
-                            , {
-                                title: styletext(
-                                    `Downloads List`,
-                                    parseInt(
-                                        `${FONT_STYLE}`))
-                                , rowId: `${presix}mdownloader`
-                            }
-                            , {
-                                title: styletext(`X-media List`,
-                                    parseInt(
-                                        `${FONT_STYLE}`))
-                                , rowId: `${presix}mxediazi`
-                            }
-                            , {
-                                title: styletext(`Tools List`,
-                                    parseInt(
-                                        `${FONT_STYLE}`))
-                                , rowId: `${presix}mtool`
-                            }
-                            , {
-                                title: styletext(`Owner List`,
-                                    parseInt(
-                                        `${FONT_STYLE}`))
-                                , rowId: `${presix}muser`
-                            }
-                            , {
-                                title: styletext(
-                                    `Logomaker List`,
-                                    parseInt(
-                                        `${FONT_STYLE}`))
-                                , rowId: `${presix}mtextmaker`
-                            }
-                            , {
-                                title: styletext(`Group List`,
-                                    parseInt(
-                                        `${FONT_STYLE}`))
-                                , rowId: `${presix}mgroup`
-                            }
-            , ]
-              }
-          , ]
-
-                const listMessage = {
-                    text: styletext(men, parseInt(`${FONT_STYLE}`))
-                    , footer: "AlienAlfa"
-                    , buttonText: styletext("Show menu", parseInt(
-                        `${FONT_STYLE}`))
-                    , sections
-                }
-
-                return await message.client.sendMessage(message.jid,
-                    listMessage)
-
-            }
-        });
+    });
 
     command({
             pattern: "help"
@@ -1256,3 +1233,5 @@ if (THEME === "normal") {
         })
 
 }
+
+
