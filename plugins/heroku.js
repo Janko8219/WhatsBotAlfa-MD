@@ -1,7 +1,7 @@
 const got = require("got");
 const Heroku = require("heroku-client");
-const { command, isPrivate, tiny } = require("../lib");
 const heroku = new Heroku({ token: process.env.HEROKU_API_KEY });
+const { command, isPrivate, tiny } = require("../lib");
 const baseURI = "/apps/" + process.env.HEROKU_APP_NAME;
 const simpleGit = require("simple-git");
 const { secondsToDHMS } = require("../lib");
@@ -119,7 +119,7 @@ command(
           const url = `https://api.heroku.com/accounts/${account.id}/actions/get-quota`
           headers = {
             'User-Agent': 'Chrome/80.0.3987.149 Mobile Safari/537.36',
-            Authorization: 'Bearer ' + config.HEROKU_API_KEY,
+            Authorization: 'Bearer ' + process.env.HEROKU_API_KEY,
             Accept: 'application/vnd.heroku+json; version=3.account-quotas',
           }
           const res = await got(url, { headers })
@@ -128,15 +128,15 @@ command(
           const quota_used = Math.floor(resp.quota_used)
           const percentage = Math.round((quota_used / total_quota) * 100);
           const remaining = total_quota - quota_used
-          const quota = `Total Quota : ${ await secondsToHms(total_quota)}
-Used  Quota : ${ await secondsToHms(quota_used)}
-Remaning    : ${ await secondsToHms(remaining)}
+          const quota = `Total Quota : ${ await secondsToDHMS(total_quota)}
+Used  Quota : ${ await secondsToDHMS(quota_used)}
+Remaning    : ${ await secondsToDHMS(remaining)}
 Usage %     : ${ await secondsToDHMS(percentage)}
 `
-          await message.send('```' + quota + '```')
+          await message.sendMessage('```' + quota + '```')
         })
         .catch(async (error) => {
-          return await message.send(`HEROKU : ${error.body.message}`)
+          return await message.sendMessage(`HEROKU : ${error}`)
         })
     } catch (error) {
       await message.send(error)
@@ -282,12 +282,12 @@ command(
       if (commits.total === 0) {
         return await message.sendMessage("_Already on latest version_");
       } else {
-        await message.treply("_Updating_");
+        await message.treply("𝙐𝙋𝘿𝘼𝙏𝙄𝙉𝙂...");
 
         try {
           var app = await heroku.get("/apps/" + process.env.HEROKU_APP_NAME);
         } catch {
-          await message.sendMessage("_Invalid Heroku Details_");
+          await message.sendMessage("_𝘐𝘯𝘷𝘢𝘭𝘪𝘥 𝘏𝘦𝘳𝘰𝘬𝘶 𝘋𝘦𝘵𝘢𝘪𝘭𝘴_");
 
           await new Promise((r) => setTimeout(r, 1000));
         }
@@ -307,13 +307,13 @@ command(
         }
         await git.push("heroku", config.BRANCH);
 
-        await message.sendMessage("UPDATED");
+        await message.sendMessage("𝙐𝙋𝘿𝘼𝙏𝙀𝘿!");
       }
     }
     await git.fetch();
     var commits = await git.log([config.BRANCH + "..origin/" + config.BRANCH]);
     if (commits.total === 0) {
-      await message.sendMessage("_Already on latest version_");
+      await message.sendMessage("_𝘈𝘭𝘳𝘦𝘢𝘥𝘺 𝘰𝘯 𝘭𝘢𝘵𝘦𝘴𝘵 𝘷𝘦𝘳𝘴𝘪𝘰𝘯_");
     } else {
       var availupdate = "*ᴜᴘᴅᴀᴛᴇs ᴀᴠᴀɪʟᴀʙʟᴇ* \n\n";
       commits["all"].map((commit, num) => {
@@ -440,6 +440,8 @@ try{
 		await message.client.sendMessage(message.jid, buttonMessage)
 	}
 });
+
+
 
 
 
