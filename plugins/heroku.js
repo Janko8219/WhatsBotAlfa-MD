@@ -22,14 +22,14 @@ command(
 
   let buttonsntilink = [
      {
-        buttonId: `alfares`,
+        buttonId: `rs`,
         buttonText: {
            displayText: 'Restart'
         },
         type: 1
              },
      {
-        buttonId: `rs`,
+        buttonId: `reboot`,
         buttonText: {
            displayText: 'Reboot'
         },
@@ -52,7 +52,7 @@ Reboot service`,
 
 command(
   {
-    pattern: "alfars",
+    pattern: "reboot",
     fromMe: true,
     desc: "Restart Dyno",
     type: "heroku",
@@ -103,89 +103,46 @@ command(
       });
   }
 );
-/*
-command({
-	pattern: 'dyno',
-	fromMe: true,
-	desc: "Show Quota info",
-	type: 'heroku'
-}, async (message, match) => {
-	heroku.get('/account').then(async (account) => {
-		url = "https://api.heroku.com/accounts/" + account.id + "/actions/get-quota"
-		headers = {
-			"User-Agent": "Chrome/80.0.3987.149 Mobile Safari/537.36",
-			"Authorization": "Bearer " + process.env.HEROKU_API_KEY,
-			"Accept": "application/vnd.heroku+json; version=3.account-quotas",
-		}
-		await got(url, {
-			headers: headers
-		}).then(async (res) => {
-			const resp = JSON.parse(res.body);
-			total_quota = Math.floor(resp.account_quota);
-			quota_used = Math.floor(resp.quota_used);
-			percentage = Math.round((quota_used / total_quota) * 100);
-			remaining = total_quota - quota_used;
-			await message.send(
-				'```Total Quota```' + ": ```{}```\n\n".format(secondsToHms(total_quota)) +
-				'```Used Quota```'+ ": ```{}```\n".format(secondsToHms(quota_used)) +
-				'```Usage %   ```' + ": ```{}```\n\n".format(percentage) +
-				'```Dyno Left```' + ": ```{}```\n".format(secondsToHms(remaining))
-			);
-		}).catch(async (err) => {
-			await message.send(err.message);
-		});
-	});
-});
 
-
-*/
 command(
   {
     pattern: "dyno",
-    fromMe: true,
+    fromMe: isPrivate,
     desc: "Show Quota info",
     type: "heroku",
-
   },
-  async (message, match, m) => {
+  async (message) => {
+    try {
       heroku
         .get("/account")
         .then(async (account) => {
           const url = `https://api.heroku.com/accounts/${account.id}/actions/get-quota`;
           headers = {
             "User-Agent": "Chrome/80.0.3987.149 Mobile Safari/537.36",
-            "Authorization": "Bearer " + process.env.HEROKU_API_KEY,
-            "Accept": "application/vnd.heroku+json; version=3.account-quotas",
+            Authorization: "Bearer " + process.env.HEROKU_API_KEY,
+            Accept: "application/vnd.heroku+json; version=3.account-quotas",
           };
-
-
-
-
-
-          await fetch(url, {
-            headers: headers
-          }).then(async (res) => {
-            const resp = JSON.parse(res.body);
-            total_quota = Math.floor(resp.account_quota);
-            quota_used = Math.floor(resp.quota_used);
-            percentage = Math.round((quota_used / total_quota) * 100);
-            remaining = total_quota - quota_used;
-            await message.send(
-'```Total Quota```' + ": ```{}```\n\n".format(secondsToHms(total_quota)) +
-'```Used Quota```'+ ": ```{}```\n".format(secondsToHms(quota_used)) +
-'```Usage %   ```' + ": ```{}```\n\n".format(percentage) +
-'```Dyno Left```' + ": ```{}```\n".format(secondsToHms(remaining))
-            );
-          })
-          
-          
-          .catch(async (err) => {
-            await message.send(err.message);
-          });
+          const res = await got(url, { headers });
+          const resp = JSON.parse(res.body);
+          const total_quota = Math.floor(resp.account_quota);
+          const quota_used = Math.floor(resp.quota_used);
+          const percentage = Math.round((quota_used / total_quota) * 100);
+          const remaining = total_quota - quota_used;
+          const quota = `
+Total Quota : ${secondsToDHMS(total_quota)}
+Used  Quota : ${secondsToDHMS(quota_used)}
+Usage %     : ${secondsToDHMS(percentage)}
+Remaning    : ${secondsToDHMS(remaining)}`;
+          await message.sendMessage("```" + quota + "```");
+        })
+        .catch(async (error) => {
+          return await message.sendMessage(`HEROKU : ${error.body.message}`);
         });
+    } catch (error) {
+      await message.sendMessage(error);
+    }
   }
 );
-
 
 
 command(
