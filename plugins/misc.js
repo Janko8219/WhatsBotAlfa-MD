@@ -1,4 +1,4 @@
-const { command, sleep, isPrivate, Gpt } = require("../lib/");
+const { command, sleep, isPrivate, getJson, cloudspace } = require("../lib/");
 
 command({
     pattern: "getqr ?(.*)",
@@ -21,12 +21,24 @@ command({
 
 command({
   pattern: "gpt",
-  fromMe: true,
+  fromMe: isPrivate,
   desc: "ChatGPT",
   type: "misc",
 
 },
 async (message, match, m) => {
-let chat = await Gpt(match, message)
-return await message.sendMessage(chat)
+  if (!match) return await message.sendMessage("_Ask Somthing to chatGPT_");
+  let response  = await getJson(`https://api-viper-x0.vercel.app/api/openai?openaiapikey=${process.env.chatGPT_API}&text=${match}`)
+  let rezi = await response.data.text.toString().replace("\n\n","")
+  return await message.reply(rezi);
 })
+
+command({
+  pattern: "sync",
+  fromMe: true,
+  desc: "Sync Databade to server",
+  type: "misc",
+},
+async (message, match, m) => {
+  cloudspace()
+})  
