@@ -5,6 +5,7 @@ const { writeFile, readFile } = require("fs");
 const chalk = require("chalk")
 const { exec, spawn, execSync } = require("child_process")
 const axios = require("axios");
+const { toAudio } = require("../lib/media");
 
 const events = require("../lib/event");
 const { command, isPrivate, getJson } = require("../lib");
@@ -13,16 +14,9 @@ const { hostname, uptime, totalmem, freemem } = require("os");
 const { configz } = require("dotenv");
 const fetch = require('node-fetch')
 const config = require('../database/settings')
-const { SUDO } = require('../database/settings');
-
-
-
-
-const { jslbuffer } = require('abu-bot');
-
-const logos = "https://i.imgur.com/MIJv3kT.jpeg";
-const ttsss = "https://i.imgur.com/ZnkdCpE.jpeg";
-
+const { SUDO, MENTION_AUD, MENTION_IMG, MENTION, STORAGE_JID } = require('../database/settings');
+const {getAudioBufferFromLink, addInfo, jslbuffer} = require('abu-bot') 
+let db = JSON.parse(fs.readFileSync('./database/settings.json'));
 
 
 command(
@@ -50,7 +44,7 @@ command(
 
 
 command({on: "text", fromMe: isPrivate,}, async (message, match, m) => {
-  let cmdz = match.toString().split(' ')[0]
+  let cmdz = await match.toString().split(' ')[0]
   switch (cmdz) {
 
   	case 'bass':
@@ -176,8 +170,7 @@ command({
 
  },
  async (message, match, m) => {
-  let db = JSON.parse(fs.readFileSync('./database/settings.json'));
-let jid = db.config.STORAGE_JID
+let jid = STORAGE_JID
 
    return await message.client.relayMessage(jid, m.quoted.message, { messageId: m.quoted.key.id,});
 });
@@ -194,8 +187,8 @@ command({
 async (message, match, m) => {
  // if (message.reply_message.mtype != "viewOnceMessageV2") return await message.treply("_Not a View Once_");
   let buff = await m.quoted.download();
-  let jid = db.config.STORAGE_JID
-  return await message.client.relayMessage(jid, buff, { messageId: m.quoted.key.id,});
+  let jid = STORAGE_JID
+  return await message.client.sendMessage(jid, buff);
 }
 );
 
@@ -262,27 +255,32 @@ message.sendMessage(config.ALIVE)
 
 // Thanks to Abu ser
 
-
-command({pattern: 'mention ?(.*)', fromMe: true,dontAddCommandList: true}, (async (message, match) => { return;}));
-
+let MFOR_TITLE = "WhatsBotAlfa-MD"
+let MFOR_BODY = "sᴏᴜɴᴅ : ▮▮▮▮▮▮▯▯▯"
+let MFOR_MEDIA_URL = 'https://www.instagram.com/alienalfa'
+let MFOR_SOURCE_URL = 'https://www.instagram.com/alienalfa'
 
 
 command({on: 'text' ,fromMe: false}, (async (message, match) => {
-var _0x1ae292=_0x458e;(function(_0x244c14,_0x5e9c44){var _0x3d3301=_0x458e,_0x212af2=_0x244c14();while(!![]){try{var _0x21722f=-parseInt(_0x3d3301(0x182))/0x1*(-parseInt(_0x3d3301(0x185))/0x2)+-parseInt(_0x3d3301(0x199))/0x3+-parseInt(_0x3d3301(0x188))/0x4+-parseInt(_0x3d3301(0x18b))/0x5*(parseInt(_0x3d3301(0x19b))/0x6)+-parseInt(_0x3d3301(0x17e))/0x7*(parseInt(_0x3d3301(0x18e))/0x8)+-parseInt(_0x3d3301(0x18a))/0x9*(-parseInt(_0x3d3301(0x195))/0xa)+parseInt(_0x3d3301(0x191))/0xb*(parseInt(_0x3d3301(0x18f))/0xc);if(_0x21722f===_0x5e9c44)break;else _0x212af2['push'](_0x212af2['shift']());}catch(_0x1822af){_0x212af2['push'](_0x212af2['shift']());}}}(_0x153e,0xdfd15));var duration=[0xbebc74b,0x3d0770,0x15751bf0],audios=_0x1ae292(0x189),tit=_0x1ae292(0x18c),art='Hy',logo=_0x1ae292(0x187);function _0x153e(){var _0x268523=['https://i.imgur.com/2nEwQLy.mp4,https://i.imgur.com/lDZOEHl.mp4,https://i.imgur.com/WxQbgOU.mp4,https://i.imgur.com/BVypaUc.mp4,https://i.imgur.com/L9Jnpt5.mp4,https://i.imgur.com/3Te73pm.mp4,https://i.imgur.com/gkzBe1X.mp4,https://i.imgur.com/aEpNAtl.mp4,https://i.imgur.com/JiuFyXy.mp4,https://i.imgur.com/jEVzyWS.mp4,https://i.imgur.com/1npmJY6.mp4','72okrhzt','4407035NrnGmR','Alfa','abu-bot','5096InxDNZ','1979844uElRXl','Abu\x20audio\x20metadata','209jggIir','includes','floor','sᴏᴜɴᴅ\x20:\x20▮▮▮▮▮▮▯▯▯','736220rdNsNG','length','jid','audio/mp4','994671JDzRnF','split','6OdHxQQ','7721RtalVw','mp4','sendMessage','random','365kVwvNa','WhatsBotAlfa-MD','mention','3156dXKoWt','client','https://i.imgur.com/0IaPsiM.jpeg','5869468LHQOFo'];_0x153e=function(){return _0x268523;};return _0x153e();}const image='https://i.imgur.com/0IaPsiM.jpeg',image_1=_0x1ae292(0x187),{getAudioBufferFromLink,addInfo,jslbuffer}=require(_0x1ae292(0x18d)),image1=await jslbuffer(image),image2=await jslbuffer(image_1),audio=await jslbuffer(audios);function _0x458e(_0x4cbb98,_0x125c12){var _0x153e98=_0x153e();return _0x458e=function(_0x458ef3,_0x23ec01){_0x458ef3=_0x458ef3-0x17e;var _0x45d9e0=_0x153e98[_0x458ef3];return _0x45d9e0;},_0x458e(_0x4cbb98,_0x125c12);}let fake=duration[Math[_0x1ae292(0x193)](Math[_0x1ae292(0x181)]()*duration[_0x1ae292(0x196)])]||![];var jids=audios[_0x1ae292(0x19a)](',')['filter'](_0x174e76=>_0x174e76[_0x1ae292(0x192)](_0x1ae292(0x17f)));try{var men=message['mention'][0x0][_0x1ae292(0x19a)]('@')[0x0];}catch{return;}message['mention']&&message[_0x1ae292(0x184)][0x0]&&SUDO[_0x1ae292(0x192)](men)&&getAudioBufferFromLink(jids[Math[_0x1ae292(0x193)](Math[_0x1ae292(0x181)]()*jids['length'])],async function(_0x422af6){var _0x46a448=_0x1ae292;if(_0x422af6){try{var _0x5b2b97=await addInfo('mention_msg.mp3',tit,art,_0x46a448(0x190),await jslbuffer(logo));}catch(_0x5e2b33){return await message[_0x46a448(0x180)]('Error\x20on\x20parsing\x20audio\x20\x0a'+_0x5e2b33);}return message[_0x46a448(0x186)][_0x46a448(0x180)](message[_0x46a448(0x197)],{'audio':_0x5b2b97,'second':fake,'mimetype':_0x46a448(0x198),'ptt':!![],'waveform':[0x0,0x63,0x0,0x63,0x0,0x63,0x0],'contextInfo':{'externalAdReply':{'title':_0x46a448(0x183),'body':_0x46a448(0x194),'mediaType':0x2,'thumbnail':image2,'mediaUrl':'https://www.instagram.com/niiick0o','sourceUrl':'https://www.instagram.com/niiick0o'}}},{'quoted':message});}});
+function _0x2cdd(_0x1b7eab,_0x212b17){var _0x226776=_0x2267();return _0x2cdd=function(_0x2cddd6,_0x2c7fb6){_0x2cddd6=_0x2cddd6-0x6f;var _0xae08b9=_0x226776[_0x2cddd6];return _0xae08b9;},_0x2cdd(_0x1b7eab,_0x212b17);}var _0x57493e=_0x2cdd;(function(_0x4a31b5,_0x3b952e){var _0x1ddae5=_0x2cdd,_0x6fc690=_0x4a31b5();while(!![]){try{var _0x3675a1=-parseInt(_0x1ddae5(0x83))/0x1+-parseInt(_0x1ddae5(0x7f))/0x2+parseInt(_0x1ddae5(0x76))/0x3+parseInt(_0x1ddae5(0x7c))/0x4+-parseInt(_0x1ddae5(0x84))/0x5+parseInt(_0x1ddae5(0x77))/0x6*(-parseInt(_0x1ddae5(0x70))/0x7)+parseInt(_0x1ddae5(0x7b))/0x8;if(_0x3675a1===_0x3b952e)break;else _0x6fc690['push'](_0x6fc690['shift']());}catch(_0x1083b6){_0x6fc690['push'](_0x6fc690['shift']());}}}(_0x2267,0x5ff0b));var duration=[0xbebc74b,0x3d0770,0x15751bf0],audios=MENTION_AUD,tit=_0x57493e(0x7a),art=_0x57493e(0x75),logo=MENTION_IMG[_0x57493e(0x79)]()[_0x57493e(0x7d)](',');const image=logo[Math[_0x57493e(0x85)](Math['random']()*logo[_0x57493e(0x82)])],image1=await jslbuffer(image),resimg=await jslbuffer(image),audio=await jslbuffer(audios);let fake=duration[Math[_0x57493e(0x85)](Math[_0x57493e(0x81)]()*duration[_0x57493e(0x82)])]||![];var jids=audios[_0x57493e(0x7d)](',')[_0x57493e(0x74)](_0x23a487=>_0x23a487[_0x57493e(0x7e)](_0x57493e(0x71)));function _0x2267(){var _0x5c7b08=['includes','443114PrnKQd','Alfa\x20audio\x20metadata','random','length','170028VBTwbp','1987700YIjgGc','floor','jid','147fcZBhj','mp4','sendMessage','mention','filter','Automation','1994745LdNfnC','252fRREtP','client','toString','AlienAlfa','2507584vScELS','818460eImjsU','split'];_0x2267=function(){return _0x5c7b08;};return _0x2267();}try{var men=message[_0x57493e(0x73)][0x0][_0x57493e(0x7d)]('@')[0x0];}catch{return;}message[_0x57493e(0x73)]&&message[_0x57493e(0x73)][0x0]&&SUDO[_0x57493e(0x7e)](men)&&getAudioBufferFromLink(jids[Math[_0x57493e(0x85)](Math[_0x57493e(0x81)]()*jids[_0x57493e(0x82)])],async function(_0xfb736){var _0x1cce6b=_0x57493e;if(_0xfb736){try{var _0x5223b2=await addInfo('mention_msg.mp3',tit,art,_0x1cce6b(0x80),await jslbuffer(image));}catch(_0x4a36f8){return await message[_0x1cce6b(0x72)]('Error\x20on\x20parsing\x20audio\x20\x0a'+_0x4a36f8);}return message[_0x1cce6b(0x78)][_0x1cce6b(0x72)](message[_0x1cce6b(0x6f)],{'audio':_0x5223b2,'second':fake,'mimetype':'audio/mpeg','ptt':!![],'waveform':[0x0,0x63,0x37,0x63,0x0,0x63,0x37,0x63,0x0,0x63,0x37,0x63,0x37,0x63,0x0],'contextInfo':{'externalAdReply':{'title':MFOR_TITLE,'body':MFOR_BODY,'mediaType':0x2,'thumbnail':resimg,'mediaUrl':MFOR_MEDIA_URL,'sourceUrl':MFOR_SOURCE_URL}}},{'quoted':message});}});
 }));
 
 
 
+let TTS_TITLE = "ᴛᴇxᴛ ᴄᴏɴᴠᴇʀᴛᴇʀ"
+let TTS_BODY = "ᴠᴏɪᴄᴇ : ▮▮▮▮▮▮▯▯▯"
+let TTS_MEDIA_URL = 'https://www.instagram.com/alienalfa'
+let TTS_SOURCE_URL = 'https://github.com/Alien-Alfa/WhatsBotAlfa-MD'
 
 command
 	(
 		{
 			pattern: "tts ?(.*)",
-			fromMe: isPrivate,
+			fromMe: isPublic,
 			desc: "Convert Text To Audio",
 			type: "misc",
 		},
 		async (message, match) => {
-      const _0x57af8e=_0x8851;(function(_0x3cf910,_0x474510){const _0x4bc566=_0x8851,_0xf50672=_0x3cf910();while(!![]){try{const _0x58dac2=-parseInt(_0x4bc566(0xab))/0x1+-parseInt(_0x4bc566(0x9d))/0x2+parseInt(_0x4bc566(0xa4))/0x3*(-parseInt(_0x4bc566(0xad))/0x4)+parseInt(_0x4bc566(0x9f))/0x5*(parseInt(_0x4bc566(0xa2))/0x6)+parseInt(_0x4bc566(0xa6))/0x7*(-parseInt(_0x4bc566(0xae))/0x8)+parseInt(_0x4bc566(0xaa))/0x9+parseInt(_0x4bc566(0xa9))/0xa;if(_0x58dac2===_0x474510)break;else _0xf50672['push'](_0xf50672['shift']());}catch(_0x101fb1){_0xf50672['push'](_0xf50672['shift']());}}}(_0x5670,0x3367a),match=match||message[_0x57af8e(0x9c)][_0x57af8e(0xa0)]);if(!match)return await message['reply'](_0x57af8e(0xa8));function _0x8851(_0x243a2f,_0x1e060a){const _0x5670b3=_0x5670();return _0x8851=function(_0x885118,_0x5bdf06){_0x885118=_0x885118-0x9c;let _0x26ba04=_0x5670b3[_0x885118];return _0x26ba04;},_0x8851(_0x243a2f,_0x1e060a);}const logo=await jslbuffer(logos);let tts=await getJson(_0x57af8e(0xac)+match);await message[_0x57af8e(0xa3)]['sendMessage'](message[_0x57af8e(0xa5)],{'audio':{'url':tts['result']},'mimetype':_0x57af8e(0xa1),'ptt':!![],'waveform':[0x0,0x63,0x0,0x63,0x0,0x63,0x0],'contextInfo':{'externalAdReply':{'title':_0x57af8e(0x9e),'body':'ᴠᴏɪᴄᴇ\x20:\x20▮▮▮▮▮▮▯▯▯','mediaType':0x1,'thumbnail':logo,'mediaUrl':'https://www.instagram.com/reel/安装它','sourceUrl':_0x57af8e(0xa7)}}},{'quoted':message});function _0x5670(){const _0x267802=['105aiNNoI','text','audio/mp4','10566ejoNQv','client','45801voZPoT','jid','948269lIuTXI','https://github.com/Afx-Abu/Abu-MD','*_Need\x20Text_*','9859120axYLTc','253908kOmEXt','124870SLhESx','https://api.akuari.my.id/texttovoice/texttosound_english?query=','48lIGKQo','16sxRZUi','reply_message','523086xtaVGS','ᴛᴇxᴛ\x20ᴄᴏɴᴠᴇʀᴛᴇʀ'];_0x5670=function(){return _0x267802;};return _0x5670();}
+      const _0x4b0f73=_0x5588;(function(_0x81cd92,_0x97af2f){const _0x17cb9f=_0x5588,_0xfcb40e=_0x81cd92();while(!![]){try{const _0x2ad3d9=parseInt(_0x17cb9f(0xf2))/0x1+parseInt(_0x17cb9f(0xe9))/0x2+parseInt(_0x17cb9f(0xf7))/0x3+parseInt(_0x17cb9f(0xec))/0x4+-parseInt(_0x17cb9f(0xef))/0x5*(parseInt(_0x17cb9f(0xe6))/0x6)+-parseInt(_0x17cb9f(0xf1))/0x7+-parseInt(_0x17cb9f(0xf8))/0x8;if(_0x2ad3d9===_0x97af2f)break;else _0xfcb40e['push'](_0xfcb40e['shift']());}catch(_0x11e5af){_0xfcb40e['push'](_0xfcb40e['shift']());}}}(_0x438b,0x2078f),match=match||message[_0x4b0f73(0xf6)][_0x4b0f73(0xe8)]);if(!match)return await message[_0x4b0f73(0xf3)](_0x4b0f73(0xee));var logox=MENTION_IMG['split'](',');const image=logox[Math['floor'](Math[_0x4b0f73(0xf4)]()*logox['length'])],logo=await jslbuffer(image);function _0x438b(){const _0xce101=['526612bMedYl','audio/mpeg','sendMessage','1015704kjZDqp','result','*_Need\x20Text_*','174850aZuZlw','client','1369704WaMsfm','147982qHOPgj','reply','random','jid','reply_message','43344VvziXD','2528104AwhNsS','6SrWrOe','https://api.akuari.my.id/texttovoice/texttosound_english?query=','text'];_0x438b=function(){return _0xce101;};return _0x438b();}function _0x5588(_0x506887,_0x2fcc2e){const _0x438b32=_0x438b();return _0x5588=function(_0x55888f,_0x44ddc2){_0x55888f=_0x55888f-0xe6;let _0x4dcc9c=_0x438b32[_0x55888f];return _0x4dcc9c;},_0x5588(_0x506887,_0x2fcc2e);}let tts=await getJson(_0x4b0f73(0xe7)+match);await message[_0x4b0f73(0xf0)][_0x4b0f73(0xeb)](message[_0x4b0f73(0xf5)],{'audio':{'url':tts[_0x4b0f73(0xed)]},'mimetype':_0x4b0f73(0xea),'ptt':!![],'waveform':[0x0,0x63,0x0,0x63,0x0,0x63,0x0],'contextInfo':{'externalAdReply':{'title':TTS_TITLE,'body':TTS_BODY,'mediaType':0x1,'thumbnail':logo,'mediaUrl':TTS_MEDIA_URL,'sourceUrl':TTS_SOURCE_URL}}},{'quoted':message});
 	}
 );
