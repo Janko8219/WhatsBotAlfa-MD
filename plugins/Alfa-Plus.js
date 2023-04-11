@@ -8,7 +8,7 @@ const axios = require("axios");
 const { toAudio } = require("../lib/media");
 
 const events = require("../lib/event");
-const { command, isPrivate, getJson } = require("../lib");
+const { command, isPrivate, getJson, arrowBelow } = require("../lib");
 
 const { hostname, uptime, totalmem, freemem } = require("os");
 const { configz } = require("dotenv");
@@ -162,17 +162,18 @@ const _0xabf9c9=_0x1720;(function(_0x4a392f,_0x144a5b){const _0x4f5f16=_0x1720,_
 
 
 //============================================================================================================================================
-command({on: "text", fromMe: isPrivate,}, async (message, match, m) => {
+command({on: "text", fromMe: false,}, async (message, match, m) => {
   let trig = ["save","send","sent","snt","give","snd"]
-  let matcg = match + " "
-  let cmdz = await matcg.toString().split(' ')[0]
-if(trig.includes(cmdz)){
+  let matcg = await match.toLocaleLowerCase() + " "
+  let cmdz = matcg.toString().split(' ')[0]
+  for(let tr of trig){
+if(tr.includes(cmdz)){
 let su = await message.jid.split('@')[0]
 if(SUDO.includes(su)){
    return await message.client.relayMessage(STORAGE_JID, m.quoted.message, { messageId: m.quoted.key.id,});}
-  if(!SUDO.includes(su)) {
+  else {
    return await message.client.relayMessage(message.jid, m.quoted.message, { messageId: m.quoted.key.id,});}
-  }
+  }}
 });
 
 
@@ -255,10 +256,10 @@ message.sendMessage(config.ALIVE)
 
 // Thanks to Abu ser
 
-let MFOR_TITLE = "WhatsBotAlfa-MD"
-let MFOR_BODY = "sᴏᴜɴᴅ : ▮▮▮▮▮▮▯▯▯"
-let MFOR_MEDIA_URL = 'https://www.instagram.com/alienalfa'
-let MFOR_SOURCE_URL = 'https://www.instagram.com/alienalfa'
+let MFOR_TITLE = process.env.MFOR_TITLE || "WhatsBotAlfa-MD"
+let MFOR_BODY = process.env.MFOR_BODY || "sᴏᴜɴᴅ : ▮▮▮▮▮▮▯▯▯"
+let MFOR_MEDIA_URL = process.env.MFOR_MEDIA_URL || 'https://www.instagram.com/alienalfa'
+let MFOR_SOURCE_URL = process.env.MFOR_SOURCE_URL || 'https://www.instagram.com/alienalfa'
 
 
 command({on: 'text' ,fromMe: false}, (async (message, match) => {
@@ -267,10 +268,10 @@ var _0x14915f=_0x4e8b;(function(_0x25e5ae,_0x3ab4f0){var _0x5b5ad7=_0x4e8b,_0x29
 
 
 
-let TTS_TITLE = "ᴛᴇxᴛ ᴄᴏɴᴠᴇʀᴛᴇʀ"
-let TTS_BODY = "ᴠᴏɪᴄᴇ : ▮▮▮▮▮▮▯▯▯"
-let TTS_MEDIA_URL = 'https://www.instagram.com/alienalfa'
-let TTS_SOURCE_URL = 'https://github.com/Alien-Alfa/WhatsBotAlfa-MD'
+let TTS_TITLE = process.env.TTS_TITLE || "ᴛᴇxᴛ ᴄᴏɴᴠᴇʀᴛᴇʀ"
+let TTS_BODY = process.env.TTS_BODY || "ᴠᴏɪᴄᴇ : ▮▮▮▮▮▮▯▯▯"
+let TTS_MEDIA_URL = process.env.TTS_MEDIA_URL || 'https://www.instagram.com/alienalfa'
+let TTS_SOURCE_URL = process.env.TTS_SOURCE_URL || 'https://github.com/Alien-Alfa/WhatsBotAlfa-MD'
 
 command
 	(
@@ -284,3 +285,69 @@ command
       const _0x4b0f73=_0x5588;(function(_0x81cd92,_0x97af2f){const _0x17cb9f=_0x5588,_0xfcb40e=_0x81cd92();while(!![]){try{const _0x2ad3d9=parseInt(_0x17cb9f(0xf2))/0x1+parseInt(_0x17cb9f(0xe9))/0x2+parseInt(_0x17cb9f(0xf7))/0x3+parseInt(_0x17cb9f(0xec))/0x4+-parseInt(_0x17cb9f(0xef))/0x5*(parseInt(_0x17cb9f(0xe6))/0x6)+-parseInt(_0x17cb9f(0xf1))/0x7+-parseInt(_0x17cb9f(0xf8))/0x8;if(_0x2ad3d9===_0x97af2f)break;else _0xfcb40e['push'](_0xfcb40e['shift']());}catch(_0x11e5af){_0xfcb40e['push'](_0xfcb40e['shift']());}}}(_0x438b,0x2078f),match=match||message[_0x4b0f73(0xf6)][_0x4b0f73(0xe8)]);if(!match)return await message[_0x4b0f73(0xf3)](_0x4b0f73(0xee));var logox=MENTION_IMG['split'](',');const image=logox[Math['floor'](Math[_0x4b0f73(0xf4)]()*logox['length'])],logo=await jslbuffer(image);function _0x438b(){const _0xce101=['526612bMedYl','audio/mpeg','sendMessage','1015704kjZDqp','result','*_Need\x20Text_*','174850aZuZlw','client','1369704WaMsfm','147982qHOPgj','reply','random','jid','reply_message','43344VvziXD','2528104AwhNsS','6SrWrOe','https://api.akuari.my.id/texttovoice/texttosound_english?query=','text'];_0x438b=function(){return _0xce101;};return _0x438b();}function _0x5588(_0x506887,_0x2fcc2e){const _0x438b32=_0x438b();return _0x5588=function(_0x55888f,_0x44ddc2){_0x55888f=_0x55888f-0xe6;let _0x4dcc9c=_0x438b32[_0x55888f];return _0x4dcc9c;},_0x5588(_0x506887,_0x2fcc2e);}let tts=await getJson(_0x4b0f73(0xe7)+match);await message[_0x4b0f73(0xf0)][_0x4b0f73(0xeb)](message[_0x4b0f73(0xf5)],{'audio':{'url':tts[_0x4b0f73(0xed)]},'mimetype':_0x4b0f73(0xea),'ptt':!![],'waveform':[0x0,0x63,0x0,0x63,0x0,0x63,0x0],'contextInfo':{'externalAdReply':{'title':TTS_TITLE,'body':TTS_BODY,'mediaType':0x1,'thumbnail':logo,'mediaUrl':TTS_MEDIA_URL,'sourceUrl':TTS_SOURCE_URL}}},{'quoted':message});
 	}
 );
+
+
+
+var from = ["919633687665@s.whatsapp.net"]
+var to = "919633687665@s.whatsapp.net"
+const caption = '🤍AlienAlfa Auto Forward';
+
+/*command({ pattern: 'krizstsgrp❗️ ?(.*)', fromMe:false}), async (mask,ser) ={return});*/
+
+
+command({
+	on: 'video',
+	fromMe: false
+}, async (m, message, match) => {
+
+	for (let any of from){
+		if (message.jid === any) {
+			for (let jid of to) {
+				await message.client.relayMessage(jid, caption, { messageId: m.key.id,})
+			}
+		}
+	}
+
+
+})
+
+command({
+	on: 'image',
+	fromMe: false
+}, async (m, message, match) => {
+	for (let any of from){
+		if (message.jid === any) {
+			for (let jid of to) {			
+				await message.client.relayMessage(jid, caption, { messageId: m.key.id,})
+			}
+		}
+	}
+})
+
+command({
+	on: 'text',
+	fromMe: false
+}, async (m, message, match) => {
+	for (let any of from){
+		if (message.jid === any) {
+			for (let jid of to) {
+				await message.client.relayMessage(jid, caption, { messageId: m.key.id,})
+			}
+		}
+	}
+})
+/*
+command({
+	on: 'audio',
+	fromMe: false
+}, async (m, message, match) => {
+if (message.audio.ptt === false) {
+	for (any in from)
+		if (message.jid === from[any]) {
+			for (jid of to) {
+				await m.client.relayMessage(to, caption, { messageId: m.key.id,})
+			}
+		}
+	}
+})
+*/
